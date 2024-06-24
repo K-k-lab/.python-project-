@@ -2,7 +2,6 @@ def print_welcome():
     print("Welcome to the Adventure Quest!")
     print("In this game, you'll create a character and embark on an exciting journey.")
     print("Let's start by creating your character.")
-
 def create_character():
     character = {}
     character['name'] = input("Enter your character's name: ")
@@ -10,18 +9,15 @@ def create_character():
     character['class'] = input("Choose your class (warrior/mage/thief): ").lower()
     character['inventory'] = []
     return character
-
 def make_choice(prompt, options):
     choice = ""
     while choice not in options:
         choice = input(prompt).lower()
     return choice
-
 def forest_path(character):
     print("You enter the forest and see two paths ahead.")
     choice = make_choice("Do you want to go left or right? (left/right): ", ['left', 'right'])
-    
-    if choice == 'left':
+     if choice == 'left':
         print("You encounter a wild bear!")
         bear_encounter(character)
     elif choice == 'right':
@@ -29,10 +25,8 @@ def forest_path(character):
         character['inventory'].append("treasure")
         print("You now have: ", character['inventory'])
         village(character)
-
 def bear_encounter(character):
     choice = make_choice("Do you want to fight or run? (fight/run): ", ['fight', 'run'])
-    
     if choice == 'fight':
         if character['class'] == 'warrior':
             print("You bravely fight and defeat the bear!")
@@ -43,26 +37,21 @@ def bear_encounter(character):
     elif choice == 'run':
         print("You safely run back to the forest entrance.")
         forest_path(character)
-
 def village(character):
     print("You arrive at a village. The villagers need help solving a puzzle to unlock a mysterious door.")
     puzzle_success = solve_puzzle()
-    
     if puzzle_success:
         print("You solved the puzzle and unlocked the door! You are a hero in the village.")
     else:
         print("You failed to solve the puzzle. The villagers are disappointed.")
     print("Your adventure ends here. Thank you for playing!")
-
 def solve_puzzle():
     puzzle_answer = "magic"
     attempt = input("Solve the puzzle: What is the key to all secrets? ").lower()
     return attempt == puzzle_answer
-
 def main():
     print_welcome()
     character = create_character()
     forest_path(character)
-
 if __name__ == "__main__":
     main()
