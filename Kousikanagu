@@ -7,7 +7,7 @@ def create_character():
     character = {}
     character['name'] = input("Enter your character's name: ")
     print(f"Welcome, {character['name']}!")
-    character['class'] = input("Choose your class (warrior/mage/thief): ").lower()
+    character['class'] = input("Choose your class (warrior/magic/thief): ").lower()
     character['inventory'] = []
     return character
 
