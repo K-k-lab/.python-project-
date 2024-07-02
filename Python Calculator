@@ -1,0 +1,54 @@
+def add(a, b):
+    return a + b
+
+def subtract(a, b):
+    return a - b
+
+def multiply(a, b):
+    return a * b
+
+def divide(a, b):
+    if b == 0:
+        raise ValueError("Cannot divide by zero")
+    return a / b
+
+def calculate(expression):
+    try:
+        parts = expression.split()
+        if len(parts) != 3:
+            raise ValueError("Invalid input format. Use: <number> <operator> <number>")
+
+        a = float(parts[0])
+        operator = parts[1]
+        b = float(parts[2])
+
+        if operator == '+':
+            return add(a, b)
+        elif operator == '-':
+            return subtract(a, b)
+        elif operator == '*':
+            return multiply(a, b)
+        elif operator == '/':
+            return divide(a, b)
+        else:
+            raise ValueError("Invalid operator. Use: +, -, *, /")
+
+    except ValueError as e:
+        return f"Error: {e}"
+
+def main():
+    print("Welcome to the Text-Based Calculator!")
+    print("Enter your expressions in the format: <number> <operator> <number>")
+    print("Operators supported: +, -, *, /")
+    print("Type 'quit' to exit the calculator.")
+
+    while True:
+        user_input = input("> ")
+        if user_input.lower() == 'quit':
+            print("Goodbye!")
+            break
+        result = calculate(user_input)
+        print(result)
+
+if __name__ == "__main__":
+    main()
