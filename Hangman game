@@ -1,0 +1,67 @@
+import random
+
+def choose_random_word():
+    words = ['apple', 'bag', 'star']
+    return random.choice(words)
+
+def initialize_hidden_word(word):
+    return ['*' for _ in word]
+
+def display_hidden_word(hidden_word):
+    print("Word to guess:", ''.join(hidden_word))
+
+def get_max_attempts():
+    while True:
+        try:
+            num = int(input('Enter a number between 5 to 10: '))
+            if 5 <= num <= 10:
+                return num
+            else:
+                print("Please enter a number between 5 and 10.")
+        except ValueError:
+            print("Invalid input. Please enter a number.")
+
+def get_user_guess():
+    while True:
+        guess = input("Enter a letter: ").lower()
+        if guess.isalpha() and len(guess) == 1:
+            return guess
+        else:
+            print("Invalid input. Please enter a single letter.")
+
+def update_hidden_word(random_word, hidden_word, guess):
+    correct_guess = False
+    for i in range(len(random_word)):
+        if guess == random_word[i]:
+            hidden_word[i] = guess
+            correct_guess = True
+    return correct_guess
+
+def play_game():
+    random_word = choose_random_word()
+    hidden_word = initialize_hidden_word(random_word)
+    display_hidden_word(hidden_word)
+    
+    max_attempts = get_max_attempts()
+    incorrect_guesses = 0
+    
+    while True:
+        if incorrect_guesses == max_attempts:
+            print("You Lost! The word was:", random_word)
+            break
+        
+        guess = get_user_guess()
+        correct_guess = update_hidden_word(random_word, hidden_word, guess)
+        
+        if not correct_guess:
+            incorrect_guesses += 1
+            print(f"Incorrect guess. You have {max_attempts - incorrect_guesses} attempts left.")
+        
+        display_hidden_word(hidden_word)
+        
+        if '*' not in hidden_word:
+            print("You Win! The word was:", random_word)
+            break
+
+if __name__ == "__main__":
+    play_game()
